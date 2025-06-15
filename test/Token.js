@@ -111,7 +111,11 @@ describe('Token', () => {
 				expect(args.value).to.equal(amount)	
 			})
 		})
-			describe('Failure', () => {
+			describe('Failure', () => {			
+			it('rejects invalid spenders', async () => {
+				const invalidSpender = '0x0000000000000000000000000000000000000000'
+				await expect(token.connect(deployer).approve(invalidSpender, tokens(100))).to.be.reverted
+			})
 		})
 	})
 })
